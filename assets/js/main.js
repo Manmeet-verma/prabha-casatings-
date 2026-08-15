@@ -97,18 +97,6 @@ document.addEventListener('DOMContentLoaded', function() {
     window.addEventListener('scroll', animateCounters);
     animateCounters();
 
-    // Back to top
-    var backToTop = document.getElementById('backToTop');
-    if (backToTop) {
-        window.addEventListener('scroll', function() {
-            backToTop.classList.toggle('visible', window.scrollY > 500);
-        });
-        backToTop.addEventListener('click', function(e) {
-            e.preventDefault();
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        });
-    }
-
     // Smooth scroll
     document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
         anchor.addEventListener('click', function(e) {
