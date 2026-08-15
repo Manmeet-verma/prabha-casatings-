@@ -16,16 +16,23 @@ document.addEventListener('DOMContentLoaded', function() {
     // Mobile menu
     var hamburger = document.getElementById('hamburger');
     var navMenu = document.getElementById('navMenu');
+    var navOverlay = document.getElementById('navOverlay');
+    function closeMenu() {
+        hamburger.classList.remove('active');
+        navMenu.classList.remove('active');
+        if (navOverlay) navOverlay.classList.remove('active');
+    }
     if (hamburger) {
         hamburger.addEventListener('click', function() {
             hamburger.classList.toggle('active');
             navMenu.classList.toggle('active');
+            if (navOverlay) navOverlay.classList.toggle('active');
         });
+        if (navOverlay) {
+            navOverlay.addEventListener('click', closeMenu);
+        }
         document.querySelectorAll('.nav-link').forEach(function(link) {
-            link.addEventListener('click', function() {
-                hamburger.classList.remove('active');
-                navMenu.classList.remove('active');
-            });
+            link.addEventListener('click', closeMenu);
         });
     }
 
