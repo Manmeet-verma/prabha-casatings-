@@ -406,6 +406,10 @@ img { max-width: 100%; height: auto; }
     .contact-grid { gap: 30px; }
 }
 
+/* Nav Overlay */
+.nav-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); z-index: 1005; opacity: 0; visibility: hidden; transition: var(--transition); }
+.nav-overlay.active { opacity: 1; visibility: visible; }
+
 /* ===== Responsive: Mobile Landscape (max-width: 768px) ===== */
 @media (max-width: 768px) {
     /* Top Bar */
@@ -414,42 +418,45 @@ img { max-width: 100%; height: auto; }
     .top-bar-left, .top-bar-right { gap: 12px; justify-content: center; }
     .top-bar-item { font-size: 12px; }
 
-    /* Navigation - Fixed Sidebar always visible */
+    /* Navigation - Slide-in Sidebar */
     .nav-menu {
         position: fixed;
         top: 0;
         left: 0;
-        width: 220px;
-        max-width: 70vw;
+        width: 260px;
+        max-width: 80vw;
         height: 100vh;
         height: 100dvh;
         background: var(--primary);
         flex-direction: column;
-        padding: 90px 15px 30px;
+        padding: 90px 20px 30px;
         z-index: 1007;
         overflow-y: auto;
         gap: 0;
-        transform: none;
-        transition: none;
-        box-shadow: 2px 0 15px rgba(0, 0, 0, 0.2);
+        transform: translateX(-100%);
+        transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: none;
         border-right: 1px solid rgba(200, 164, 92, 0.2);
+    }
+    .nav-menu.active {
+        transform: translateX(0);
+        box-shadow: 5px 0 25px rgba(0, 0, 0, 0.3);
     }
     .nav-link { padding: 12px 16px; font-size: 14px; border-radius: 8px; width: 100%; color: rgba(255, 255, 255, 0.8); font-weight: 500; }
     .nav-link::after { display: none; }
     .nav-link:hover, .nav-link.active { background: rgba(200, 164, 92, 0.15); color: var(--secondary); }
-    .hamburger { display: none !important; }
+    .hamburger { display: flex !important; z-index: 1010; }
     .btn-call { display: none; }
-    .nav-overlay { display: none !important; }
-    .main-header { left: 220px; width: calc(100% - 220px); }
+    .main-header { left: 0; width: 100%; }
 
-    /* Offset all content for sidebar */
+    /* Full width content - no sidebar offset */
     .hero, .about-section, .products-section, .stats-section, .why-us-section,
     .process-section, .gallery-section, .testimonials-section, .cta-section,
     .contact-section, .map-section, .main-footer, .floating-buttons-left {
-        margin-left: 220px;
-        width: calc(100% - 220px);
+        margin-left: 0;
+        width: 100%;
     }
-    .floating-buttons-left { left: auto; right: 20px; }
+    .floating-buttons-left { left: 15px; }
     .main-footer { padding-left: 0; padding-right: 0; }
 
     /* Hero */
@@ -560,16 +567,9 @@ img { max-width: 100%; height: auto; }
     .section-padding { padding: 50px 0; }
     .section-header { margin-bottom: 30px; }
 
-    /* Navigation - Narrower sidebar */
-    .nav-menu { width: 180px; padding: 80px 10px 20px; }
+    /* Navigation - Narrower slide-in sidebar */
+    .nav-menu { width: 240px; padding: 80px 12px 20px; }
     .nav-link { padding: 10px 12px; font-size: 13px; }
-    .main-header { left: 180px; width: calc(100% - 180px); }
-    .hero, .about-section, .products-section, .stats-section, .why-us-section,
-    .process-section, .gallery-section, .testimonials-section, .cta-section,
-    .contact-section, .map-section, .main-footer, .floating-buttons-left {
-        margin-left: 180px;
-        width: calc(100% - 180px);
-    }
 
     /* Top Bar */
     .top-bar-left { gap: 8px; }
@@ -668,15 +668,8 @@ img { max-width: 100%; height: auto; }
 
 /* ===== Responsive: Very Small Phones (max-width: 360px) ===== */
 @media (max-width: 360px) {
-    .nav-menu { width: 150px; padding: 70px 8px 15px; }
+    .nav-menu { width: 220px; padding: 70px 8px 15px; }
     .nav-link { padding: 8px 10px; font-size: 12px; }
-    .main-header { left: 150px; width: calc(100% - 150px); }
-    .hero, .about-section, .products-section, .stats-section, .why-us-section,
-    .process-section, .gallery-section, .testimonials-section, .cta-section,
-    .contact-section, .map-section, .main-footer, .floating-buttons-left {
-        margin-left: 150px;
-        width: calc(100% - 150px);
-    }
     .hero-title { font-size: 22px; }
     .hero-stat-number { font-size: 22px; }
     .hero-stats { gap: 8px; }
