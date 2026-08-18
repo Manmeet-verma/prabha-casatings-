@@ -1,16 +1,17 @@
-/* MAKKAH STEEL ALLOYS - Optimized JavaScript */
+/* PRABHAT CASTINGS - Optimized JavaScript */
 document.addEventListener('DOMContentLoaded', function() {
-    // Preloader - fast
+    // Preloader
     window.addEventListener('load', function() {
         setTimeout(function() {
-            document.getElementById('preloader').classList.add('hidden');
+            var preloader = document.getElementById('preloader');
+            if (preloader) preloader.classList.add('hidden');
         }, 800);
     });
 
     // Header scroll
     var header = document.getElementById('header');
     window.addEventListener('scroll', function() {
-        header.classList.toggle('scrolled', window.scrollY > 100);
+        header.classList.toggle('scrolled', window.scrollY > 50);
     });
 
     // Mobile menu
@@ -18,14 +19,14 @@ document.addEventListener('DOMContentLoaded', function() {
     var navMenu = document.getElementById('navMenu');
     var navOverlay = document.getElementById('navOverlay');
     function closeMenu() {
-        hamburger.classList.remove('active');
-        navMenu.classList.remove('active');
+        if (hamburger) hamburger.classList.remove('active');
+        if (navMenu) navMenu.classList.remove('active');
         if (navOverlay) navOverlay.classList.remove('active');
         document.body.style.overflow = '';
     }
     function openMenu() {
-        hamburger.classList.add('active');
-        navMenu.classList.add('active');
+        if (hamburger) hamburger.classList.add('active');
+        if (navMenu) navMenu.classList.add('active');
         if (navOverlay) navOverlay.classList.add('active');
         document.body.style.overflow = 'hidden';
     }
@@ -40,30 +41,62 @@ document.addEventListener('DOMContentLoaded', function() {
         if (navOverlay) {
             navOverlay.addEventListener('click', closeMenu);
         }
-        document.querySelectorAll('.nav-link').forEach(function(link) {
-            link.addEventListener('click', closeMenu);
+    }
+    document.querySelectorAll('.nav-link').forEach(function(link) {
+        link.addEventListener('click', function(e) {
+            closeMenu();
         });
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape' && navMenu.classList.contains('active')) {
-                closeMenu();
-            }
-        });
+    });
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') closeMenu();
+    });
+
+    // Get header height
+    function getHeaderHeight() {
+        return header ? header.offsetHeight : 80;
     }
 
-    // Active nav on scroll
-    var sections = document.querySelectorAll('section[id]');
-    window.addEventListener('scroll', function() {
-        var scrollY = window.pageYOffset;
-        sections.forEach(function(section) {
-            var top = section.offsetTop - 150;
-            var height = section.offsetHeight;
-            var id = section.getAttribute('id');
-            var link = document.querySelector('.nav-link[href="#' + id + '"]');
-            if (link) {
-                link.classList.toggle('active', scrollY > top && scrollY <= top + height);
+    // Smooth scroll with proper offset
+    document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
+        anchor.addEventListener('click', function(e) {
+            var href = this.getAttribute('href');
+            if (!href || href === '#') return;
+            var target = document.querySelector(href);
+            if (target) {
+                e.preventDefault();
+                closeMenu();
+                var offset = getHeaderHeight() + 10;
+                var top = target.getBoundingClientRect().top + window.pageYOffset - offset;
+                window.scrollTo({ top: top, behavior: 'smooth' });
             }
         });
     });
+
+    // Active nav on scroll
+    var sections = document.querySelectorAll('section[id]');
+    function updateActiveNav() {
+        var scrollY = window.pageYOffset;
+        var headerH = getHeaderHeight();
+        var currentSection = 'home';
+        sections.forEach(function(section) {
+            var top = section.offsetTop - headerH - 60;
+            var bottom = top + section.offsetHeight;
+            if (scrollY >= top && scrollY < bottom) {
+                currentSection = section.getAttribute('id');
+            }
+        });
+        if (scrollY < 200) currentSection = 'home';
+        document.querySelectorAll('.nav-link').forEach(function(link) {
+            var href = link.getAttribute('href');
+            if (href === '#' + currentSection) {
+                link.classList.add('active');
+            } else {
+                link.classList.remove('active');
+            }
+        });
+    }
+    window.addEventListener('scroll', updateActiveNav);
+    updateActiveNav();
 
     // Product filter
     var filterBtns = document.querySelectorAll('.filter-btn');
@@ -80,11 +113,11 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Scroll reveal - simple
+    // Scroll reveal
     function reveal() {
         document.querySelectorAll('.reveal-up, .reveal-left, .reveal-right').forEach(function(el) {
             var top = el.getBoundingClientRect().top;
-            if (top < window.innerHeight - 100) {
+            if (top < window.innerHeight - 80) {
                 var delay = el.getAttribute('data-delay') || 0;
                 setTimeout(function() { el.classList.add('revealed'); }, delay);
             }
@@ -98,7 +131,7 @@ document.addEventListener('DOMContentLoaded', function() {
         document.querySelectorAll('.stat-number, .hero-stat-number').forEach(function(counter) {
             if (counter.classList.contains('done')) return;
             var top = counter.getBoundingClientRect().top;
-            if (top < window.innerHeight - 100) {
+            if (top < window.innerHeight - 80) {
                 counter.classList.add('done');
                 var target = parseInt(counter.getAttribute('data-count'));
                 var current = 0;
@@ -117,17 +150,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     window.addEventListener('scroll', animateCounters);
     animateCounters();
-
-    // Smooth scroll
-    document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
-        anchor.addEventListener('click', function(e) {
-            var target = document.querySelector(this.getAttribute('href'));
-            if (target) {
-                e.preventDefault();
-                window.scrollTo({ top: target.offsetTop - 80, behavior: 'smooth' });
-            }
-        });
-    });
 
     // Lightbox
     var galleryItems = document.querySelectorAll('.gallery-item');
@@ -218,10 +240,10 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Hero particles - reduced count
+    // Hero particles
     var particlesContainer = document.getElementById('particles');
     if (particlesContainer) {
-        for (var i = 0; i < 15; i++) {
+        for (var i = 0; i < 12; i++) {
             var p = document.createElement('div');
             p.className = 'particle';
             var size = Math.random() * 4 + 2;

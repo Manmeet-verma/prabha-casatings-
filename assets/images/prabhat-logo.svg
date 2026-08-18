@@ -1,0 +1,240 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 500" width="600" height="500">
+  <defs>
+    <!-- Metallic gradient for chrome effect -->
+    <linearGradient id="chrome" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#606060"/>
+      <stop offset="15%" style="stop-color:#909090"/>
+      <stop offset="25%" style="stop-color:#d0d0d0"/>
+      <stop offset="35%" style="stop-color:#f5f5f5"/>
+      <stop offset="45%" style="stop-color:#ffffff"/>
+      <stop offset="55%" style="stop-color:#e0e0e0"/>
+      <stop offset="65%" style="stop-color:#b0b0b0"/>
+      <stop offset="80%" style="stop-color:#808080"/>
+      <stop offset="100%" style="stop-color:#585858"/>
+    </linearGradient>
+    <!-- Vertical chrome for fan segments -->
+    <linearGradient id="chromeV" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#505050"/>
+      <stop offset="20%" style="stop-color:#a0a0a0"/>
+      <stop offset="35%" style="stop-color:#e0e0e0"/>
+      <stop offset="50%" style="stop-color:#ffffff"/>
+      <stop offset="65%" style="stop-color:#d0d0d0"/>
+      <stop offset="80%" style="stop-color:#909090"/>
+      <stop offset="100%" style="stop-color:#555555"/>
+    </linearGradient>
+    <!-- Darker chrome for stripes -->
+    <linearGradient id="chromeDark" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#3a3a3a"/>
+      <stop offset="25%" style="stop-color:#606060"/>
+      <stop offset="50%" style="stop-color:#808080"/>
+      <stop offset="75%" style="stop-color:#555555"/>
+      <stop offset="100%" style="stop-color:#333333"/>
+    </linearGradient>
+    <!-- Roller body gradient -->
+    <linearGradient id="rollerBody" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#e8e8e8"/>
+      <stop offset="15%" style="stop-color:#f8f8f8"/>
+      <stop offset="30%" style="stop-color:#ffffff"/>
+      <stop offset="50%" style="stop-color:#f0f0f0"/>
+      <stop offset="70%" style="stop-color:#c8c8c8"/>
+      <stop offset="85%" style="stop-color:#a0a0a0"/>
+      <stop offset="100%" style="stop-color:#808080"/>
+    </linearGradient>
+    <!-- Blue text gradient -->
+    <linearGradient id="blueText" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#3070d0"/>
+      <stop offset="50%" style="stop-color:#1850b0"/>
+      <stop offset="100%" style="stop-color:#0c3090"/>
+    </linearGradient>
+    <!-- Inner glow for text -->
+    <filter id="textGlow" x="-5%" y="-10%" width="110%" height="130%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="2" result="blur"/>
+      <feFlood flood-color="#ffffff" flood-opacity="0.3"/>
+      <feComposite in2="blur" operator="in" result="glow"/>
+      <feMerge>
+        <feMergeNode in="glow"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <!-- Drop shadow -->
+    <filter id="shadow" x="-5%" y="-5%" width="115%" height="120%">
+      <feDropShadow dx="0" dy="3" stdDeviation="5" flood-color="#000" flood-opacity="0.5"/>
+    </filter>
+    <!-- White outline filter -->
+    <filter id="whiteOutline" x="-8%" y="-8%" width="120%" height="120%">
+      <feMorphology in="SourceAlpha" operator="dilate" radius="4" result="expanded"/>
+      <feFlood flood-color="white" result="white"/>
+      <feComposite in="white" in2="expanded" operator="in" result="outline"/>
+      <feMerge>
+        <feMergeNode in="outline"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <!-- Combined outline + shadow -->
+    <filter id="logoFinal" x="-10%" y="-10%" width="125%" height="130%">
+      <!-- White outline -->
+      <feMorphology in="SourceAlpha" operator="dilate" radius="5" result="expanded"/>
+      <feFlood flood-color="white" result="whiteFlood"/>
+      <feComposite in="whiteFlood" in2="expanded" operator="in" result="outline"/>
+      <!-- Shadow under outline -->
+      <feGaussianBlur in="outline" stdDeviation="3" result="outlineShadow"/>
+      <feFlood flood-color="#000" flood-opacity="0.4" result="shadowColor"/>
+      <feComposite in="shadowColor" in2="outlineShadow" operator="in" result="shadow"/>
+      <feOffset in="shadow" dx="0" dy="4" result="shadowOffset"/>
+      <!-- Merge: shadow, outline, original -->
+      <feMerge>
+        <feMergeNode in="shadowOffset"/>
+        <feMergeNode in="outline"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Black background -->
+  <rect width="600" height="500" fill="#000000"/>
+
+  <!-- Main logo group with outline and shadow -->
+  <g filter="url(#logoFinal)" transform="translate(300, 230)">
+
+    <!-- === FAN / SUNBURST SEGMENTS === -->
+    <!-- 7 segments radiating upward from center -->
+    <!-- Each segment: trapezoid shape, alternating solid chrome and striped -->
+
+    <!-- Segment 1 (far left) - striped -->
+    <g transform="rotate(-60)">
+      <polygon points="-18,-30 18,-30 28,-165 -28,-165" fill="url(#chromeDark)" stroke="#888" stroke-width="1.5"/>
+      <!-- Horizontal stripes -->
+      <rect x="-22" y="-155" width="44" height="6" rx="1" fill="url(#chromeV)" opacity="0.7"/>
+      <rect x="-20" y="-138" width="40" height="6" rx="1" fill="url(#chromeV)" opacity="0.7"/>
+      <rect x="-19" y="-121" width="38" height="6" rx="1" fill="url(#chromeV)" opacity="0.7"/>
+      <rect x="-18" y="-104" width="36" height="6" rx="1" fill="url(#chromeV)" opacity="0.7"/>
+      <rect x="-17" y="-87" width="34" height="6" rx="1" fill="url(#chromeV)" opacity="0.7"/>
+      <rect x="-16" y="-70" width="32" height="6" rx="1" fill="url(#chromeV)" opacity="0.7"/>
+      <rect x="-15" y="-53" width="30" height="6" rx="1" fill="url(#chromeV)" opacity="0.7"/>
+      <!-- Top cap -->
+      <ellipse cx="0" cy="-165" rx="12" ry="6" fill="url(#chrome)" stroke="#999" stroke-width="0.8"/>
+    </g>
+
+    <!-- Segment 2 - solid chrome -->
+    <g transform="rotate(-40)">
+      <polygon points="-16,-30 16,-30 24,-175 -24,-175" fill="url(#chromeV)" stroke="#aaa" stroke-width="1"/>
+      <!-- Top pointed tip -->
+      <polygon points="-8,-175 8,-175 0,-195" fill="url(#chrome)" stroke="#bbb" stroke-width="0.8"/>
+      <!-- Subtle center line -->
+      <line x1="0" y1="-35" x2="0" y2="-175" stroke="#ccc" stroke-width="0.5" opacity="0.3"/>
+    </g>
+
+    <!-- Segment 3 - striped -->
+    <g transform="rotate(-20)">
+      <polygon points="-15,-30 15,-30 22,-180 -22,-180" fill="url(#chromeDark)" stroke="#888" stroke-width="1.5"/>
+      <rect x="-18" y="-170" width="36" height="6" rx="1" fill="url(#chromeV)" opacity="0.7"/>
+      <rect x="-17" y="-152" width="34" height="6" rx="1" fill="url(#chromeV)" opacity="0.7"/>
+      <rect x="-16" y="-134" width="32" height="6" rx="1" fill="url(#chromeV)" opacity="0.7"/>
+      <rect x="-16" y="-116" width="32" height="6" rx="1" fill="url(#chromeV)" opacity="0.7"/>
+      <rect x="-15" y="-98" width="30" height="6" rx="1" fill="url(#chromeV)" opacity="0.7"/>
+      <rect x="-15" y="-80" width="30" height="6" rx="1" fill="url(#chromeV)" opacity="0.7"/>
+      <rect x="-14" y="-62" width="28" height="6" rx="1" fill="url(#chromeV)" opacity="0.7"/>
+      <ellipse cx="0" cy="-180" rx="10" ry="5" fill="url(#chrome)" stroke="#999" stroke-width="0.8"/>
+    </g>
+
+    <!-- Segment 4 (center) - solid, tallest, pointed -->
+    <g transform="rotate(0)">
+      <polygon points="-16,-30 16,-30 22,-190 -22,-190" fill="url(#chromeV)" stroke="#bbb" stroke-width="1"/>
+      <!-- Tall pointed center piece -->
+      <polygon points="-10,-190 10,-190 0,-225" fill="url(#chrome)" stroke="#ccc" stroke-width="0.8"/>
+      <!-- Highlight lines -->
+      <line x1="-5" y1="-40" x2="-7" y2="-185" stroke="#ddd" stroke-width="0.8" opacity="0.4"/>
+      <line x1="0" y1="-40" x2="0" y2="-220" stroke="#fff" stroke-width="0.5" opacity="0.5"/>
+      <line x1="5" y1="-40" x2="7" y2="-185" stroke="#ddd" stroke-width="0.8" opacity="0.4"/>
+    </g>
+
+    <!-- Segment 5 - striped -->
+    <g transform="rotate(20)">
+      <polygon points="-15,-30 15,-30 22,-180 -22,-180" fill="url(#chromeDark)" stroke="#888" stroke-width="1.5"/>
+      <rect x="-18" y="-170" width="36" height="6" rx="1" fill="url(#chromeV)" opacity="0.7"/>
+      <rect x="-17" y="-152" width="34" height="6" rx="1" fill="url(#chromeV)" opacity="0.7"/>
+      <rect x="-16" y="-134" width="32" height="6" rx="1" fill="url(#chromeV)" opacity="0.7"/>
+      <rect x="-16" y="-116" width="32" height="6" rx="1" fill="url(#chromeV)" opacity="0.7"/>
+      <rect x="-15" y="-98" width="30" height="6" rx="1" fill="url(#chromeV)" opacity="0.7"/>
+      <rect x="-15" y="-80" width="30" height="6" rx="1" fill="url(#chromeV)" opacity="0.7"/>
+      <rect x="-14" y="-62" width="28" height="6" rx="1" fill="url(#chromeV)" opacity="0.7"/>
+      <ellipse cx="0" cy="-180" rx="10" ry="5" fill="url(#chrome)" stroke="#999" stroke-width="0.8"/>
+    </g>
+
+    <!-- Segment 6 - solid chrome -->
+    <g transform="rotate(40)">
+      <polygon points="-16,-30 16,-30 24,-175 -24,-175" fill="url(#chromeV)" stroke="#aaa" stroke-width="1"/>
+      <polygon points="-8,-175 8,-175 0,-195" fill="url(#chrome)" stroke="#bbb" stroke-width="0.8"/>
+      <line x1="0" y1="-35" x2="0" y2="-175" stroke="#ccc" stroke-width="0.5" opacity="0.3"/>
+    </g>
+
+    <!-- Segment 7 (far right) - striped -->
+    <g transform="rotate(60)">
+      <polygon points="-18,-30 18,-30 28,-165 -28,-165" fill="url(#chromeDark)" stroke="#888" stroke-width="1.5"/>
+      <rect x="-22" y="-155" width="44" height="6" rx="1" fill="url(#chromeV)" opacity="0.7"/>
+      <rect x="-20" y="-138" width="40" height="6" rx="1" fill="url(#chromeV)" opacity="0.7"/>
+      <rect x="-19" y="-121" width="38" height="6" rx="1" fill="url(#chromeV)" opacity="0.7"/>
+      <rect x="-18" y="-104" width="36" height="6" rx="1" fill="url(#chromeV)" opacity="0.7"/>
+      <rect x="-17" y="-87" width="34" height="6" rx="1" fill="url(#chromeV)" opacity="0.7"/>
+      <rect x="-16" y="-70" width="32" height="6" rx="1" fill="url(#chromeV)" opacity="0.7"/>
+      <rect x="-15" y="-53" width="30" height="6" rx="1" fill="url(#chromeV)" opacity="0.7"/>
+      <ellipse cx="0" cy="-165" rx="12" ry="6" fill="url(#chrome)" stroke="#999" stroke-width="0.8"/>
+    </g>
+
+    <!-- Small circular dots at base of each fan segment -->
+    <circle cx="-105" cy="-18" r="10" fill="url(#chrome)" stroke="#aaa" stroke-width="1"/>
+    <circle cx="-105" cy="-18" r="5" fill="#ddd" opacity="0.5"/>
+
+    <circle cx="-68" cy="-38" r="10" fill="url(#chrome)" stroke="#aaa" stroke-width="1"/>
+    <circle cx="-68" cy="-38" r="5" fill="#ddd" opacity="0.5"/>
+
+    <circle cx="-30" cy="-50" r="10" fill="url(#chrome)" stroke="#aaa" stroke-width="1"/>
+    <circle cx="-30" cy="-50" r="5" fill="#ddd" opacity="0.5"/>
+
+    <circle cx="0" cy="-55" r="10" fill="url(#chrome)" stroke="#aaa" stroke-width="1"/>
+    <circle cx="0" cy="-55" r="5" fill="#ddd" opacity="0.5"/>
+
+    <circle cx="30" cy="-50" r="10" fill="url(#chrome)" stroke="#aaa" stroke-width="1"/>
+    <circle cx="30" cy="-50" r="5" fill="#ddd" opacity="0.5"/>
+
+    <circle cx="68" cy="-38" r="10" fill="url(#chrome)" stroke="#aaa" stroke-width="1"/>
+    <circle cx="68" cy="-38" r="5" fill="#ddd" opacity="0.5"/>
+
+    <circle cx="105" cy="-18" r="10" fill="url(#chrome)" stroke="#aaa" stroke-width="1"/>
+    <circle cx="105" cy="-18" r="5" fill="#ddd" opacity="0.5"/>
+
+    <!-- === HORIZONTAL ROLLER BAR === -->
+    <!-- Main roller cylinder -->
+    <rect x="-210" y="-10" width="420" height="50" rx="25" fill="url(#rollerBody)" stroke="#999" stroke-width="1.5"/>
+
+    <!-- Left end cap -->
+    <ellipse cx="-205" cy="15" rx="14" ry="24" fill="url(#chrome)" stroke="#888" stroke-width="1"/>
+    <ellipse cx="-205" cy="12" rx="9" ry="16" fill="#ccc" opacity="0.4"/>
+    <!-- Left ridge lines -->
+    <line x1="-218" y1="5" x2="-192" y2="5" stroke="#999" stroke-width="1"/>
+    <line x1="-218" y1="12" x2="-192" y2="12" stroke="#bbb" stroke-width="0.8"/>
+    <line x1="-218" y1="19" x2="-192" y2="19" stroke="#999" stroke-width="1"/>
+    <line x1="-218" y1="26" x2="-192" y2="26" stroke="#aaa" stroke-width="0.8"/>
+
+    <!-- Right end cap -->
+    <ellipse cx="205" cy="15" rx="14" ry="24" fill="url(#chrome)" stroke="#888" stroke-width="1"/>
+    <ellipse cx="205" cy="12" rx="9" ry="16" fill="#ccc" opacity="0.4"/>
+    <!-- Right ridge lines -->
+    <line x1="192" y1="5" x2="218" y2="5" stroke="#999" stroke-width="1"/>
+    <line x1="192" y1="12" x2="218" y2="12" stroke="#bbb" stroke-width="0.8"/>
+    <line x1="192" y1="19" x2="218" y2="19" stroke="#999" stroke-width="1"/>
+    <line x1="192" y1="26" x2="218" y2="26" stroke="#aaa" stroke-width="0.8"/>
+
+    <!-- Roller highlight strips -->
+    <rect x="-170" y="-4" width="340" height="8" rx="4" fill="white" opacity="0.25"/>
+    <rect x="-160" y="36" width="320" height="5" rx="2.5" fill="black" opacity="0.08"/>
+
+    <!-- Connecting arm from fan to roller -->
+    <rect x="-12" y="-30" width="24" height="22" rx="3" fill="url(#chrome)" stroke="#999" stroke-width="1"/>
+
+    <!-- === PCM TEXT === -->
+    <text x="0" y="28" text-anchor="middle" fill="url(#blueText)" font-family="'Arial Black', 'Impact', 'Trebuchet MS', sans-serif" font-size="42" font-weight="900" letter-spacing="8" filter="url(#textGlow)">PCM</text>
+    <!-- Subtle text outline for depth -->
+    <text x="0" y="28" text-anchor="middle" fill="none" stroke="#0a2060" stroke-width="0.6" font-family="'Arial Black', 'Impact', 'Trebuchet MS', sans-serif" font-size="42" font-weight="900" letter-spacing="8" opacity="0.25">PCM</text>
+  </g>
+</svg>
